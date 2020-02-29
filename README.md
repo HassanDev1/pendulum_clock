@@ -1,4 +1,6 @@
 # pendulum_clock
+#Demo
+![Animated Pendulum clock](DemoGifs/pendulum_clock.gif)
 
 A new Flutter project.
 
