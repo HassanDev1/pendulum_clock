@@ -20,7 +20,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   _getTime(){
-    return ('${DateTime.now().hour} : ${DateTime.now().minute}');
+    String minutesBeforeTen = DateTime.now().minute.toString().padLeft(2,'0');
+    int hour = DateTime.now().hour;
+    String min = '${DateTime.now().minute <= 9 ?minutesBeforeTen:DateTime.now().minute}';
+    return ('$hour : $min');
   }
   AnimationController _controller;
   Animation _animation;
@@ -51,9 +54,13 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
    _animation = Tween(begin: -0.5,end: 0.5).animate(_animation);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         centerTitle: true,
         backgroundColor: Colors.deepOrange,
         title: Text('Clock',
+        style: TextStyle(
+          fontSize:30.0
+        ),
         )
       ),
       body: Material(
@@ -65,21 +72,17 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
             children:[
               Material(
                   elevation: 20.0,
-                 
-                    borderRadius: BorderRadius.circular(50),
-                    color:Colors.brown[600],
-                  
+                  borderRadius: BorderRadius.circular(50),
+                  color:Colors.brown[600],
                   child: Container( 
-                  
-                  width:450.0,
-                  height:450.0,
-                  child: Center(
-                    child: Text(_getTime(),
-                     textAlign:TextAlign.center,
-                    style: TextStyle(
-                     
-                      fontSize:70.0,
-                      color:Colors.white,
+                    width:450.0,
+                    height:450.0,
+                    child: Center(
+                      child: Text(_getTime(),
+                      textAlign:TextAlign.center,
+                      style: TextStyle(                       
+                        fontSize:70.0,
+                        color:Colors.white,
                       
                     ),),
                   ),
@@ -92,7 +95,6 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                 alignment: FractionalOffset(0.5, 0.2),
                 transform: Matrix4.rotationZ(_animation.value),
                 child: Image.asset('assets/images/pendulum.png',
-                
                 height: 350.0,
                 ),
               )
