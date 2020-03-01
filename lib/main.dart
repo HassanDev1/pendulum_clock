@@ -78,13 +78,25 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     width:450.0,
                     height:450.0,
                     child: Center(
-                      child: Text(_getTime(),
-                      textAlign:TextAlign.center,
-                      style: TextStyle(                       
-                        fontSize:70.0,
-                        color:Colors.white,
-                      
+                      child: ShaderMask(
+                        shaderCallback: (bounds)=>
+                        RadialGradient(
+                          center: Alignment.topLeft,
+                           radius: 1.0,
+                           colors:[
+                             Colors.yellow,
+                             Colors.deepOrange
+                           ],
+                           tileMode: TileMode.mirror
+                         ).createShader(bounds),
+                        child: Text(_getTime(),
+                        textAlign:TextAlign.center,
+                        style: TextStyle(                       
+                          fontSize:70.0,
+                          color:Colors.white,
+                        
                     ),),
+                      ),
                   ),
                   
 
